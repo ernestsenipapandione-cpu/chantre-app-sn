@@ -1,4 +1,7 @@
+// src/paytechService.js
+
 export const genererLienPaiement = async (titrePartition) => {
+  // TES CLÉS API
   const apiKey = "492ab560328ab34042fa12bfd09921380c81079f1da0bede639bbc3abaff2b6a";
   const apiSecret = "54d938670d09c26844169e4e32b63c875c01aeccf3cba5889939aa8ac7da3c88";
 
@@ -12,24 +15,27 @@ export const genererLienPaiement = async (titrePartition) => {
         "API_SECRET": apiSecret,
       },
       body: JSON.stringify({
-        item_name: `Publication: ${titrePartition}`,
+        item_name: `Publication : ${titrePartition}`,
         item_price: "500",
         currency: "XOF",
         ref_command: `ref-${Date.now()}`,
-        command_name: "Publication Chantre-App",
-        env: "live", 
+        command_name: "Paiement Publication Chantre-App",
+        env: "live", // On passe en live car tu es sur un vrai domaine Vercel
         success_url: window.location.origin + "?status=success",
         cancel_url: window.location.origin,
       }),
     });
 
     const result = await response.json();
-    if (result.success === 1) return result.redirect_url;
-    
-    alert("Erreur PayTech: " + (result.errors ? result.errors[0] : "Clés ou config invalide"));
-    return null;
+
+    if (result.success === 1) {
+      return result.redirect_url;
+    } else {
+      console.error("Détails Erreur PayTech:", result.errors);
+      return null;
+    }
   } catch (error) {
-    alert("Le navigateur bloque la connexion (CORS). Mettez le site en ligne pour tester.");
+    console.error("Erreur Connexion PayTech:", error);
     return null;
   }
 };
