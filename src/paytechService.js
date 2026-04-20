@@ -17,7 +17,7 @@ export const genererLienPaiement = async (titrePartition) => {
         currency: "XOF",
         ref_command: `ref-${Date.now()}`,
         command_name: "Publication Chantre-App",
-        env: "test", 
+        env: "live", 
         success_url: window.location.origin + "?status=success",
         cancel_url: window.location.origin,
       }),
