@@ -107,7 +107,7 @@ function App() {
         <div style={styles.logoBox} onClick={() => setShowAdmin(!showAdmin)}>
           <Music2 size={30} color="white" />
         </div>
-        <h1 style={styles.title}>Chantre-App 🇸🇳</h1>
+        <h1 style={styles.title}>Sunu-Partitions 🇸🇳</h1>
         <p style={styles.sub}>Recherchez une partition pour commencer</p>
       </header>
 
